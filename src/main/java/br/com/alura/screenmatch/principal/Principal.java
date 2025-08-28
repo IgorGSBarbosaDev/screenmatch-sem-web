@@ -29,7 +29,7 @@ public class Principal {
                     1 - Buscar séries
                     2 - Buscar episódios
                     3 - Listar séries buscadas
-                    
+                    4- 
                     0 - Sair                                 
                     """;
 
