@@ -8,23 +8,24 @@ public class Episodio {
     private String titulo;
     private Integer numeroEpisodio;
     private Double avaliacao;
-    private LocalDate dataDeLancamento;
+    private LocalDate dataLancamento;
 
-    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio){
-        this.temporada =numeroTemporada;
+    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
+        this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
         this.numeroEpisodio = dadosEpisodio.numero();
-        try{
+
+        try {
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
-        }catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
         }
-        try {
-            this.dataDeLancamento = LocalDate.parse(dadosEpisodio.dataDeLancamento());
-        }catch (DateTimeParseException ex){
-            this.dataDeLancamento = null; // Data inválida, define uma data padrão
-        }
 
+        try {
+            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
+        } catch (DateTimeParseException ex) {
+            this.dataLancamento = null;
+        }
     }
 
     public Integer getTemporada() {
@@ -47,8 +48,8 @@ public class Episodio {
         return numeroEpisodio;
     }
 
-    public void setNumeroEpisodio(Integer numero) {
-        this.numeroEpisodio = numero;
+    public void setNumeroEpisodio(Integer numeroEpisodio) {
+        this.numeroEpisodio = numeroEpisodio;
     }
 
     public Double getAvaliacao() {
@@ -59,12 +60,12 @@ public class Episodio {
         this.avaliacao = avaliacao;
     }
 
-    public LocalDate getDataDeLancamento() {
-        return dataDeLancamento;
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
     }
 
-    public void setDataDeLancamento(LocalDate dataDeLancamento) {
-        this.dataDeLancamento = dataDeLancamento;
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
     }
 
     @Override
@@ -73,6 +74,6 @@ public class Episodio {
                 ", titulo='" + titulo + '\'' +
                 ", numeroEpisodio=" + numeroEpisodio +
                 ", avaliacao=" + avaliacao +
-                ", dataDeLancamento=" + dataDeLancamento;
+                ", dataLancamento=" + dataLancamento ;
     }
 }
