@@ -171,7 +171,7 @@ public class Principal {
         System.out.println("Com avaliacao mínima de? ");
         var avaliacaoMinima = leitura.nextDouble();
         leitura.nextLine();
-        List<Serie> seriesFiltradas = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(totalTemporadas,avaliacaoMinima);
+        List<Serie> seriesFiltradas = repositorio.seriesPorTemporadaEAvaliacao(totalTemporadas,avaliacaoMinima);
         seriesFiltradas.forEach(s ->
                 System.out.println(s.getTitulo() + " | Temporadas: " + s.getTotalTemporadas() + " | Avaliacao: " + s.getAvaliacao()));
     }
