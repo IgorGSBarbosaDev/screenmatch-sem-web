@@ -34,7 +34,7 @@ public class Principal {
                     5 - Buscar series por ator
                     6 - Top 5 Series
                     7 - Buscar series por categoria
-                    
+                    8 - Filtrar séries
                     0 - Sair                                 
                     """;
 
@@ -63,6 +63,9 @@ public class Principal {
                     break;
                 case 7:
                     buscarSeriesPorCategoria();
+                    break;
+                case 8:
+                    filtrarSeriesPorTemporadaEAvaliacao();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -147,17 +150,29 @@ public class Principal {
         seriesEncontradas.forEach(s ->
                 System.out.println(s.getTitulo() + "Avaliacao: " + s.getAvaliacao()));
     }
-    public void buscarTop5Series(){
+    private void buscarTop5Series(){
         List<Serie> seriesTop5 = repositorio.findTop5ByOrderByAvaliacaoDesc();
         seriesTop5.forEach(s ->
                 System.out.println(s.getTitulo() + " | Avaliacao: " + s.getAvaliacao()));
     }
-    public void buscarSeriesPorCategoria(){
+    private void buscarSeriesPorCategoria(){
         System.out.println("Digite a categoria para busca ");
         var nomeGenero = leitura.nextLine();
         Categoria categoria = Categoria.fromPortugues(nomeGenero);
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
         System.out.println("Series da categoria "+ nomeGenero);
         seriesPorCategoria.forEach(System.out::println);
+    }
+
+    private void filtrarSeriesPorTemporadaEAvaliacao(){
+        System.out.println("Até quantas temporadas? ");
+        var totalTemporadas = leitura.nextInt();
+        leitura.nextLine();
+        System.out.println("Com avaliacao mínima de? ");
+        var avaliacaoMinima = leitura.nextDouble();
+        leitura.nextLine();
+        List<Serie> seriesFiltradas = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(totalTemporadas,avaliacaoMinima);
+        seriesFiltradas.forEach(s ->
+                System.out.println(s.getTitulo() + " | Temporadas: " + s.getTotalTemporadas() + " | Avaliacao: " + s.getAvaliacao()));
     }
 }
